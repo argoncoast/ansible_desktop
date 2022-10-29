@@ -7,11 +7,38 @@
   - name: install packages
     package:
       name:
-        - htop
-        - tmux
-        - vim-nox
+        - flatpak
+        - mc
         - python3-psutil
+        
+  - name: Add the flathub flatpak repository remote to the user installation
+    flatpak_remote:
+      name: flathub
+      state: present
+      flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
+  - name: Discord
+    flatpak:
+      name: com.discordapp.Discord
+      state: present
+      remote: flathub
+  
+  - name: install snap packages
+    snap:
+      name:
+        - authy
+        - dbeaver-ce
+        - gimp
+        - whatsie
+  
+  - name: Install classic snap packages
+    snap:
+      name: "{{ classicsnaps }}"
+      classic: yes
+    vars:
+      classicsnaps:
+        - gitkraken
+        
   - name: copy wallpaper file
     copy:
       src: files/wallpaper.png
