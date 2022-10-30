@@ -40,7 +40,60 @@
       name: org.videolan.VLC
       state: present
       remote: flathub
-      
+  
+  - name: Yaru GTK3 Themes
+    flatpak:   
+      name: 
+        - org.gtk.Gtk3theme.Yaru-Amber-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Amber-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aqua/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aqua-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aqua-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aubergine/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aubergine-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aubergine-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Blue/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Blue-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Blue-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Brown/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Brown-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Brown-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Cinnamon/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Cinnamon-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Cinnamon-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Deepblue/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Deepblue-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Deepblue-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Green/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Green-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Green-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Grey/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Grey-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Grey-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Lavender/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Lavender-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Lavender-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Orange/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Orange-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Orange-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Pink/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Pink-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Pink-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Purple/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Purple-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Purple-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Red/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Red-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Red-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Teal/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Teal-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Teal-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Yellow/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Yellow-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Yellow-light/x86_64/stable
+      state: present
+      remote: flathub
+
   - name: install snap packages
     snap:
       name:
