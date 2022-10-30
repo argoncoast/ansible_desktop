@@ -42,6 +42,31 @@
       remote: flathub
   
   - name: Yaru GTK3 Themes
+    flatpak:
+      name: 
+        - org.gtk.Gtk3theme.Yaru-dark
+        - org.gtk.Gtk3theme.Yaru-light
+        - org.gtk.Gtk3theme.Yaru-bark
+        - org.gtk.Gtk3theme.Yaru-bark-dark
+        - org.gtk.Gtk3theme.Yaru-magenta
+        - org.gtk.Gtk3theme.Yaru-magenta-dark
+        - org.gtk.Gtk3theme.Yaru-olive
+        - org.gtk.Gtk3theme.Yaru-olive-dark
+        - org.gtk.Gtk3theme.Yaru-prussiangreen
+        - org.gtk.Gtk3theme.Yaru-prussiangreen-dark
+        - org.gtk.Gtk3theme.Yaru-sage
+        - org.gtk.Gtk3theme.Yaru-sage-dark   
+## Not yet added to Flatpak - See https://github.com/ubuntu/yaru/issues/3618
+#        - org.gtk.Gtk3theme.Yaru-blue
+#        - org.gtk.Gtk3theme.Yaru-blue
+#        - org.gtk.Gtk3theme.Yaru-purple
+#        - org.gtk.Gtk3theme.Yaru-purple-dark
+#        - org.gtk.Gtk3theme.Yaru-red
+#        - org.gtk.Gtk3theme.Yaru-red-dark
+      state: present
+      remote: flathub
+  
+  - name: Yaru Old GTK3 Themes
     flatpak:   
       name: 
         - org.gtk.Gtk3theme.Yaru-Amber-dark/x86_64/stable
