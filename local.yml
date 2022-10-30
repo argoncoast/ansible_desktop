@@ -197,7 +197,7 @@
   - name: set icon size
     become_user: neil
     dconf:
-      key: "/org/gnome/shell/extensions/dash-to-dock/dock-position"
+      key: "/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size"
       value: "36"
 
   - name: move dock to bottom
