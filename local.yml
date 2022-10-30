@@ -192,6 +192,14 @@
       key: "/org/gnome/desktop/interface/gtk-theme"
       value: "'Yaru-blue-dark'"
 
+## Favourite Apps
+
+  - name: Set favourite apps in Dock
+    become_user: neil
+    dconf:
+      key: "/org/gnome/shell/favorite-apps"
+      value: ['org.gnome.Nautilus.desktop', 'firefox_firefox.desktop', 'com.discordapp.Discord.desktop', 'telegram-desktop_telegram-desktop.desktop', 'org.signal.Signal.desktop', 'com.ultimaker.cura.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Terminal.desktop']
+      
 ## Dash to Dock
 
   - name: set icon size
