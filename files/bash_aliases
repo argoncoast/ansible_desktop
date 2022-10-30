@@ -1,6 +1,6 @@
 alias sap='sudo ansible-pull -U https://github.com/argoncoast/ansible_desktop.git'
-alias ga='git add ~/dev/ansible_desktop'
-alias gc='git commit -m'
-alias gp='git push origin main'
+alias aga='cd ~/dev/ansible_desktop && git add . && cd -'
+alias agc='cd ~/dev/ansible_desktop && git commit -m'
+alias agp='cd ~/dev/ansible_desktop && git push origin main && cd -'
 
-gcp () { git add ~/dev/ansible_desktop && git commit -m "$@" && git push origin main }
+agcp () { cd ~/dev/ansible_desktop && git add . && git commit -m "$@" && git push origin main && cd -; }
