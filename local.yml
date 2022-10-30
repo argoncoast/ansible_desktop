@@ -198,7 +198,7 @@
     become_user: neil
     dconf:
       key: "/org/gnome/shell/extensions/dash-to-dock/dock-position"
-      value: "'36'"
+      value: "36"
 
   - name: move dock to bottom
     become_user: neil
