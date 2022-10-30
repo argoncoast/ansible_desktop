@@ -117,3 +117,10 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+## Add support for bash aliases in separate file
+
+if [ -f ~/.bash_aliases ]; then
+. ~/.bash_aliases
+fi
+
