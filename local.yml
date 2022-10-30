@@ -15,10 +15,12 @@
   - name: install packages
     package:
       name:
+        - dconf-editor
         - flatpak
         - mc
         - python3-psutil
         - ubuntu-restricted-extras
+        - wireguard
         
   - name: Add the flathub flatpak repository remote to the user installation
     flatpak_remote:
@@ -26,7 +28,7 @@
       state: present
       flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
-  - name: Bitwarden
+  - name: install flatpak Apps
     flatpak:
       name: 
         - com.bitwarden.desktop
@@ -193,10 +195,23 @@
       minute: "*/10"
       job: ansible-pull -o -U https://github.com/argoncoast/ansible_desktop.git 
       
-  - name: prepare eula for ubuntu-restricted-extras 
-    debconf:
-      name: ttf-mscorefonts-installer
-      question: msttcorefonts/accepted-mscorefonts-eula
-      vtype: boolean
-      value: true
 
+  - name: Add Docker GPG apt Key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
+
+  - name: Update apt and install docker-ce
+    apt:
+      name: docker-ce
+      state: latest
+      update_cache: true
+
+  - name: Install Docker Module for Python
+    pip:
+      name: docker
