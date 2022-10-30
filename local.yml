@@ -17,6 +17,7 @@
       name:
         - dconf-editor
         - flatpak
+        - gnome-tweaks
         - mc
         - python3-psutil
         - ubuntu-restricted-extras
@@ -195,6 +196,12 @@
     become_user: neil
     dconf:
       key: "/org/gnome/shell/extensions/dash-to-dock/extend-height"
+      value: "false"
+
+  - name: Change dock to hide
+    become_user: neil
+    dconf:
+      key: "/org/gnome/shell/extensions/dash-to-dock/dock-fixed"
       value: "false"
 
   - name: Intellihide
