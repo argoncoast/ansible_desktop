@@ -17,6 +17,7 @@
       name:
         - apt-transport-https
         - ca-certificates
+        - curl
         - dconf-editor
         - flatpak
         - mc
