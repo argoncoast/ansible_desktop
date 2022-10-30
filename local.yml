@@ -57,6 +57,7 @@
         - org.gtk.Gtk3theme.Yaru-sage
         - org.gtk.Gtk3theme.Yaru-sage-dark   
 ## Not yet added to Flatpak - See https://github.com/ubuntu/yaru/issues/3618
+## Also relevant? https://askubuntu.com/questions/1403931/how-to-apply-system-theme-to-flatpak-apps-that-use-gtk4
 #        - org.gtk.Gtk3theme.Yaru-blue
 #        - org.gtk.Gtk3theme.Yaru-blue
 #        - org.gtk.Gtk3theme.Yaru-purple
