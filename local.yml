@@ -184,7 +184,21 @@
       key: "/org/gnome/desktop/background/picture-options"
       value: "'zoom'"
 
+## Gnome Shell Theme
+
+  - name: Set dark theme with blue accent
+    become_user: neil
+    dconf:
+      key: "/org/gnome/desktop/interface/gtk-theme"
+      value: "'Yaru-blue-dark'"
+
 ## Dash to Dock
+
+  - name: set icon size
+    become_user: neil
+    dconf:
+      key: "/org/gnome/shell/extensions/dash-to-dock/dock-position"
+      value: "'36'"
 
   - name: move dock to bottom
     become_user: neil
