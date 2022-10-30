@@ -15,11 +15,17 @@
   - name: install packages
     package:
       name:
+        - apt-transport-https
+        - ca-certificates
         - dconf-editor
         - flatpak
         - mc
+        - python3-pip
         - python3-psutil
+        - python3-setuptools
+        - software-properties-common
         - ubuntu-restricted-extras
+        - virtualenv
         - wireguard
         
   - name: Add the flathub flatpak repository remote to the user installation
