@@ -233,7 +233,7 @@
 
   - name: Add Brave GPG apt Key
     apt_key:
-      url: ttps://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+      url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
       state: present
 
   - name: Add Brave Repository
