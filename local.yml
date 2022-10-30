@@ -32,7 +32,7 @@
     flatpak:
       name: 
         - com.bitwarden.desktop
-        - com.brave.Browser
+   #     - com.brave.Browser
         - com.ultimaker.cura
         - com.discordapp.Discord
         - org.signal.Signal
@@ -230,3 +230,20 @@
   - name: Install Docker Module for Python
     pip:
       name: docker
+
+  - name: Add Brave GPG apt Key
+    apt_key:
+      url: ttps://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+      state: present
+
+  - name: Add Brave Repository
+    apt_repository:
+      repo: deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
+      state: present
+
+  - name: Update apt and install Brave
+    apt:
+      name: 
+        - brave-browser
+      state: latest
+      update_cache: true
