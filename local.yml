@@ -4,12 +4,21 @@
   become: true
 
   tasks:
+  
+  - name: prepare eula for ubuntu-restricted-extras 
+    debconf:
+      name: ttf-mscorefonts-installer
+      question: msttcorefonts/accepted-mscorefonts-eula
+      vtype: boolean
+      value: true
+      
   - name: install packages
     package:
       name:
         - flatpak
         - mc
         - python3-psutil
+        - ubuntu-restricted-extras
         
   - name: Add the flathub flatpak repository remote to the user installation
     flatpak_remote:
@@ -113,7 +122,7 @@
         - authy
         - dbeaver-ce
         - gimp
-        - telegram
+        - telegram-desktop
         - whatsie
   
   - name: Install classic snap packages
@@ -183,4 +192,11 @@
       user: ansible
       minute: "*/10"
       job: ansible-pull -o -U https://github.com/argoncoast/ansible_desktop.git 
+      
+  - name: prepare eula for ubuntu-restricted-extras 
+    debconf:
+      name: ttf-mscorefonts-installer
+      question: msttcorefonts/accepted-mscorefonts-eula
+      vtype: boolean
+      value: true
 
