@@ -15,18 +15,11 @@
   - name: install packages
     package:
       name:
-        - apt-transport-https
-        - ca-certificates
-        - curl
         - dconf-editor
         - flatpak
         - mc
-        - python3-pip
         - python3-psutil
-        - python3-setuptools
-        - software-properties-common
         - ubuntu-restricted-extras
-        - virtualenv
         - wireguard
         
   - name: Add the flathub flatpak repository remote to the user installation
@@ -39,6 +32,7 @@
     flatpak:
       name: 
         - com.bitwarden.desktop
+        - com.brave.Browser
         - com.ultimaker.cura
         - com.discordapp.Discord
         - org.signal.Signal
@@ -201,7 +195,19 @@
       user: ansible
       minute: "*/10"
       job: ansible-pull -o -U https://github.com/argoncoast/ansible_desktop.git 
-      
+
+  - name: Install required system packages
+    apt:
+      pkg:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+        - python3-pip
+        - virtualenv
+        - python3-setuptools
+      state: latest
+      update_cache: true
 
   - name: Add Docker GPG apt Key
     apt_key:
