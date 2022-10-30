@@ -143,10 +143,10 @@
 
 ## Firefox VPN Config
 
-  - name: copy firefox vpn icon
+  - name: copy firefox desktop file
     copy:
-      src: files/firefox-vpn.png
-      dest: /home/neil/.local/share/applications/firefox-vpn.png
+      src: files/firefox.desktop
+      dest: /home/neil/.local/share/applications/firefox.desktop
       owner: neil
       group: neil
       
@@ -154,6 +154,13 @@
     copy:
       src: files/firefox-vpn.desktop
       dest: /home/neil/.local/share/applications/firefox-vpn.desktop
+      owner: neil
+      group: neil
+
+  - name: copy firefox vpn icon
+    copy:
+      src: files/firefox-vpn.png
+      dest: /home/neil/.local/share/applications/firefox-vpn.png
       owner: neil
       group: neil
 
