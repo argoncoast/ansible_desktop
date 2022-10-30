@@ -21,7 +21,9 @@
         - python3-psutil
         - ubuntu-restricted-extras
         - wireguard
-        
+
+## Flatpak Apps
+
   - name: Add the flathub flatpak repository remote to the user installation
     flatpak_remote:
       name: flathub
@@ -119,6 +121,8 @@
       state: present
       remote: flathub
 
+## Install Snaps
+
   - name: install snap packages
     snap:
       name:
@@ -136,6 +140,8 @@
       classicsnaps:
         - gitkraken
 
+## Firefox VPN Config
+
   - name: copy firefox vpn icon
     copy:
       src: files/firefox-vpn.png
@@ -149,7 +155,9 @@
       dest: /home/neil/.local/share/applications/firefox-vpn.desktop
       owner: neil
       group: neil
-      
+
+## Wallpaper
+
   - name: copy wallpaper file
     copy:
       src: files/wallpaper.png
@@ -163,11 +171,51 @@
       key: "/org/gnome/desktop/background/picture-uri"
       value: "'file:///usr/share/backgrounds/ansible-wallpaper.png'"
 
+  - name: set wallpaper (dark)
+    become_user: neil
+    dconf:
+      key: "/org/gnome/desktop/background/picture-uri"
+      value: "'file:///usr/share/backgrounds/ansible-wallpaper.png'"
+
   - name: set wallpaper position
     become_user: neil
     dconf:
       key: "/org/gnome/desktop/background/picture-options"
       value: "'zoom'"
+
+## Dash to Dock
+
+  - name: move dock to bottom
+    become_user: neil
+    dconf:
+      key: "org/gnome/shell/extensions/dash-to-dock/dock-position"
+      value: "'BOTTOM'"
+      
+  - name: Change dock to not extend
+    become_user: neil
+    dconf:
+      key: "org/gnome/shell/extensions/dash-to-dock/extend-height"
+      value: "'false'"
+
+  - name: Intellihide
+    become_user: neil
+    dconf:
+      key: "org/gnome/shell/extensions/dash-to-dock/intellihide"
+      value: "'true'"
+
+  - name: Don't show mounts in dock
+    become_user: neil
+    dconf:
+      key: "org/gnome/shell/extensions/dash-to-dock/show-mounts"
+      value: "'false'"
+      
+  - name: Don't show trash in dock
+    become_user: neil
+    dconf:
+      key: "org/gnome/shell/extensions/dash-to-dock/show-trash"
+      value: "'false'"
+
+## .bashrc
 
   - name: copy .bashrc file
     copy:
@@ -175,6 +223,8 @@
       dest: /home/neil/.bashrc
       owner: neil
       group: neil
+
+## Automate ansible deployment via cron
 
   - name: add  ansible user
     user:
@@ -195,6 +245,8 @@
       user: ansible
       minute: "*/10"
       job: ansible-pull -o -U https://github.com/argoncoast/ansible_desktop.git 
+
+## Install Docker & Docker-Compose
 
   - name: Install required system packages
     apt:
@@ -227,11 +279,11 @@
       state: latest
       update_cache: true
 
-  - name: Install Docker Module for Python
-    pip:
-      name: docker
+## To-do - Run docker daemon and add user to docker group.
 
-  - name: Add Brave GPG apt Key
+## Install Brave
+
+- name: Add Brave GPG apt Key
     apt_key:
       url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
       state: present
