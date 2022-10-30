@@ -19,28 +19,15 @@
 
   - name: Bitwarden
     flatpak:
-      name: com.bitwarden.desktop
+      name: 
+        - com.bitwarden.desktop
+        - com.ultimaker.cura
+        - com.discordapp.Discord
+        - org.signal.Signal
+        - org.videolan.VLC
       state: present
       remote: flathub
 
-  - name: Cura
-    flatpak:
-      name: com.ultimaker.cura
-      state: present
-      remote: flathub
-      
-  - name: Discord
-    flatpak:
-      name: com.discordapp.Discord
-      state: present
-      remote: flathub
-  
-  - name: VLC
-    flatpak:
-      name: org.videolan.VLC
-      state: present
-      remote: flathub
-  
   - name: Yaru GTK3 Themes
     flatpak:
       name: 
@@ -126,6 +113,7 @@
         - authy
         - dbeaver-ce
         - gimp
+        - telegram
         - whatsie
   
   - name: Install classic snap packages
@@ -178,13 +166,13 @@
 
   - name: add  ansible user
     user:
-      name: velociraptor
+      name: ansible
       system: yes
 
   - name: set up sudo for ansible user
     copy:
-      src: files/sudoer_velociraptor
-      dest: /etc/sudoers.d/velociraptor
+      src: files/sudoer_ansible
+      dest: /etc/sudoers.d/ansible
       owner: root
       group: root
       mode: 0440
@@ -192,7 +180,7 @@
   - name: add ansible-pull cron job
     cron:
       name: ansible auto-provision
-      user: velociraptor
+      user: ansible
       minute: "*/10"
       job: ansible-pull -o -U https://github.com/argoncoast/ansible_desktop.git 
 
