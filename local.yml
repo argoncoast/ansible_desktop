@@ -195,25 +195,25 @@
     become_user: neil
     dconf:
       key: "/org/gnome/shell/extensions/dash-to-dock/extend-height"
-      value: "'false'"
+      value: "false"
 
   - name: Intellihide
     become_user: neil
     dconf:
       key: "/org/gnome/shell/extensions/dash-to-dock/intellihide"
-      value: "'true'"
+      value: "true"
 
   - name: Don't show mounts in dock
     become_user: neil
     dconf:
       key: "/org/gnome/shell/extensions/dash-to-dock/show-mounts"
-      value: "'false'"
+      value: "false"
       
   - name: Don't show trash in dock
     become_user: neil
     dconf:
       key: "/org/gnome/shell/extensions/dash-to-dock/show-trash"
-      value: "'false'"
+      value: "false"
 
 ## .bashrc
 
