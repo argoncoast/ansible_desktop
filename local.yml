@@ -141,6 +141,11 @@
       classicsnaps:
         - gitkraken
 
+  - name: Remove firefox
+    snap:
+      name: firefox
+      state: absent
+
 ## Firefox VPN Config
 
 #  - name: copy firefox desktop file
@@ -300,13 +305,14 @@
       update_cache: true
 
   - name: Add Docker GPG apt Key
-    apt_key:
+    get_url:
       url: https://download.docker.com/linux/ubuntu/gpg
+      dest: /etc/apt/trusted.gpg.d/docker.asc
       state: present
 
   - name: Add Docker Repository
     apt_repository:
-      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu kinetic stable
+      repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu kinetic stable
       state: present
 
   - name: Update apt and install docker-ce
@@ -322,18 +328,36 @@
 ## Install Brave
 
   - name: Add Brave GPG apt Key
-    apt_key:
+    get_url:
       url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+      dest: /etc/apt/trusted.gpg.d/brave.asc
       state: present
 
   - name: Add Brave Repository
     apt_repository:
-      repo: deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
+      repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/brave.asc] https://brave-browser-apt-release.s3.brave.com/ stable main
       state: present
 
   - name: Update apt and install Brave
     apt:
       name: 
         - brave-browser
+      state: latest
+      update_cache: true
+
+## Install Firefox
+  - name: Add Firefox Repository
+    apt_repository:
+      repo: ppa:mozillateam/ppa
+      state: present
+
+  - name: Set PPA to be higher priority
+    shell:
+      cmd: printf 'Package: firefox\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1500\n' | tee /etc/apt/preferences.d/mozilla-firefox
+
+  - name: Update apt and install Firefox
+    apt:
+      name: 
+        - firefox
       state: latest
       update_cache: true
