@@ -360,6 +360,7 @@
       name:
         - firefox
       purge: yes
+      state: absent
 
   - name: Update apt and install Firefox
     apt:
