@@ -143,12 +143,12 @@
 
 ## Firefox VPN Config
 
-  - name: copy firefox desktop file
-    copy:
-      src: files/firefox.desktop
-      dest: /home/neil/.local/share/applications/firefox.desktop
-      owner: neil
-      group: neil
+#  - name: copy firefox desktop file
+#    copy:
+#      src: files/firefox.desktop
+#      dest: /home/neil/.local/share/applications/firefox.desktop
+#      owner: neil
+#      group: neil
       
   - name: copy firefox vpn desktop file
     copy:
@@ -207,7 +207,7 @@
     become_user: neil
     dconf:
       key: "/org/gnome/shell/favorite-apps"
-      value: ['org.gnome.Nautilus.desktop', 'firefox.desktop', 'com.discordapp.Discord.desktop', 'telegram-desktop_telegram-desktop.desktop', 'org.signal.Signal.desktop', 'com.ultimaker.cura.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Terminal.desktop']
+      value: ['org.gnome.Nautilus.desktop', 'com.discordapp.Discord.desktop', 'telegram-desktop_telegram-desktop.desktop', 'org.signal.Signal.desktop', 'com.ultimaker.cura.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Terminal.desktop']
       
 ## Dash to Dock
 
@@ -264,25 +264,25 @@
 
 ## Automate ansible deployment via cron
 
-  - name: add  ansible user
-    user:
-      name: ansible
-      system: yes
+#  - name: add  ansible user
+#    user:
+#      name: ansible
+#      system: yes
 
-  - name: set up sudo for ansible user
-    copy:
-      src: files/sudoer_ansible
-      dest: /etc/sudoers.d/ansible
-      owner: root
-      group: root
-      mode: 0440
+#  - name: set up sudo for ansible user
+#    copy:
+#      src: files/sudoer_ansible
+#      dest: /etc/sudoers.d/ansible
+#      owner: root
+#      group: root
+#      mode: 0440
 
-  - name: add ansible-pull cron job
-    cron:
-      name: ansible auto-provision
-      user: ansible
-      minute: "*/10"
-      job: ansible-pull -o -U https://github.com/argoncoast/ansible_desktop.git 
+#  - name: add ansible-pull cron job
+#    cron:
+#      name: ansible auto-provision
+#      user: ansible
+#      minute: "*/10"
+#      job: ansible-pull -o -U https://github.com/argoncoast/ansible_desktop.git 
 
 ## Install Docker & Docker-Compose
 
