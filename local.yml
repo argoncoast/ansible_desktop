@@ -363,4 +363,5 @@
         - xul-ext-ubufox
       state: latest
       install_recommends: yes
+      force: yes
       update_cache: true
