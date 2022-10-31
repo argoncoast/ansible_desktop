@@ -353,7 +353,7 @@
 
   - name: Set PPA to be higher priority
     shell:
-      cmd: printf 'Package: firefox\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1500\n' | tee /etc/apt/preferences.d/mozilla-firefox
+      cmd: "printf 'Package: firefox\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1500\n' | tee /etc/apt/preferences.d/mozilla-firefox"
 
   - name: Update apt and install Firefox
     apt:
