@@ -291,59 +291,59 @@
 
 ## Install Docker & Docker-Compose
 
-  - name: Install required system packages
-    apt:
-      pkg:
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - software-properties-common
-        - python3-pip
-        - virtualenv
-        - python3-setuptools
-      state: latest
-      update_cache: true
+#  - name: Install required system packages
+#    apt:
+#      pkg:
+#        - apt-transport-https
+#        - ca-certificates
+#        - curl
+#        - software-properties-common
+#        - python3-pip
+#        - virtualenv
+#        - python3-setuptools
+#      state: latest
+#      update_cache: true
 
-  - name: Add Docker GPG apt Key
-    get_url:
-      url: https://download.docker.com/linux/ubuntu/gpg
-      dest: /etc/apt/trusted.gpg.d/docker.asc
-      state: present
+#  - name: Add Docker GPG apt Key
+#    get_url:
+#      url: https://download.docker.com/linux/ubuntu/gpg
+#      dest: /etc/apt/trusted.gpg.d/docker.asc
+#      state: present
 
-  - name: Add Docker Repository
-    apt_repository:
-      repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu kinetic stable
-      state: present
+#  - name: Add Docker Repository
+#    apt_repository:
+#      repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu kinetic stable
+#      state: present
 
-  - name: Update apt and install docker-ce
-    apt:
-      name: 
-        - docker-ce
-        - docker-compose-plugin
-      state: latest
-      update_cache: true
+#  - name: Update apt and install docker-ce
+#    apt:
+#      name: 
+#        - docker-ce
+#        - docker-compose-plugin
+#      state: latest
+#      update_cache: true
 
 ## To-do - Run docker daemon and add user to docker group.
 
 ## Install Brave
 
-  - name: Add Brave GPG apt Key
-    get_url:
-      url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-      dest: /etc/apt/trusted.gpg.d/brave.asc
-      state: present
+#  - name: Add Brave GPG apt Key
+#    get_url:
+#      url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+#      dest: /etc/apt/trusted.gpg.d/brave.asc
+#      state: present
 
-  - name: Add Brave Repository
-    apt_repository:
-      repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/brave.asc] https://brave-browser-apt-release.s3.brave.com/ stable main
-      state: present
+#  - name: Add Brave Repository
+#    apt_repository:
+#      repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/brave.asc] https://brave-browser-apt-release.s3.brave.com/ stable main
+#      state: present
 
-  - name: Update apt and install Brave
-    apt:
-      name: 
-        - brave-browser
-      state: latest
-      update_cache: true
+#  - name: Update apt and install Brave
+#    apt:
+#      name: 
+#        - brave-browser
+#      state: latest
+#      update_cache: true
 
 ## Install Firefox
   - name: Add Firefox Repository
