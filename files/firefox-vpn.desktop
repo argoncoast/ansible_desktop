@@ -1,25 +1,23 @@
 [Desktop Entry]
-Version=1.1
+X-SnapInstanceName=firefox
+Version=1.0
 Name=Firefox VPN Web Browser
 Comment=Browse the World Wide Web via VPN
 GenericName=VPN Web Browser
-Keywords=VPN;
-Exec=firefox -P vpn --class vpn %u
+Keywords=Internet;WWW;Browser;Web;Explorer;VPN
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox -P vpn --class vpn %u
 Terminal=false
-X-MultipleArgs=false
 Type=Application
 Icon=/home/neil/.local/share/applications/firefox-vpn.png
 Categories=GNOME;GTK;Network;WebBrowser;
 MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/chrome;video/webm;application/x-xpinstall;
 StartupNotify=true
-Actions=new-window;new-private-window;
-StartupWMClass=firefox
+Actions=NewWindow;NewPrivateWindow;
 
-[Desktop Action new-window]
+[Desktop Action NewWindow]
 Name=Open a New Window
-Exec=firefox -P vpn -new-window --class vpn
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox  -P vpn -new-window --class vpn
 
-[Desktop Action new-private-window]
+[Desktop Action NewPrivateWindow]
 Name=Open a New Private Window
-Exec=firefox -P vpn -private-window --class vpn
-
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox -P vpn -private-window --class vpn

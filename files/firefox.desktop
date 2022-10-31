@@ -1,24 +1,23 @@
 [Desktop Entry]
-Version=1.1
+X-SnapInstanceName=firefox
+Version=1.0
 Name=Firefox Web Browser
 Comment=Browse the World Wide Web
 GenericName=Web Browser
 Keywords=Internet;WWW;Browser;Web;Explorer
-Exec=firefox -P clear --class clear %u
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox -P clear --class clear %u
 Terminal=false
-X-MultipleArgs=false
 Type=Application
-Icon=firefox
+Icon=/snap/firefox/1969/default256.png
 Categories=GNOME;GTK;Network;WebBrowser;
 MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/chrome;video/webm;application/x-xpinstall;
 StartupNotify=true
-Actions=new-window;new-private-window;
-StartupWMClass=firefox
+Actions=NewWindow;NewPrivateWindow;
 
-[Desktop Action new-window]
+[Desktop Action NewWindow]
 Name=Open a New Window
-Exec=firefox -P clear  -new-window --class clear
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox  -P clear -new-window --class clear
 
-[Desktop Action new-private-window]
+[Desktop Action NewPrivateWindow]
 Name=Open a New Private Window
-Exec=firefox -P clear  -private-window --class clear
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox -P clear -private-window --class clear
