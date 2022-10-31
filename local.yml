@@ -357,7 +357,10 @@
 
   - name: Update apt and install Firefox
     apt:
-      name: 
+      name:
         - firefox
+        - fonts-lyx
+        - xul-ext-ubufox
       state: latest
+      install_recommends: yes
       update_cache: true
