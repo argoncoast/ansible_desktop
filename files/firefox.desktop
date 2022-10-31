@@ -5,7 +5,7 @@ Name=Firefox Web Browser
 Comment=Browse the World Wide Web
 GenericName=Web Browser
 Keywords=Internet;WWW;Browser;Web;Explorer
-Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox -P clear --class clear %u
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox -P clear %u
 Terminal=false
 Type=Application
 Icon=/snap/firefox/1969/default256.png
@@ -16,8 +16,8 @@ Actions=NewWindow;NewPrivateWindow;
 
 [Desktop Action NewWindow]
 Name=Open a New Window
-Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox  -P clear -new-window --class clear
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox -P clear -new-window
 
 [Desktop Action NewPrivateWindow]
 Name=Open a New Private Window
-Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox -P clear -private-window --class clear
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/firefox_firefox.desktop /snap/bin/firefox -P clear -private-window
