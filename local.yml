@@ -5,6 +5,341 @@
 
   tasks:
   
+  - name: prepare eula for ubuntu-restricted-extras 
+    debconf:
+      name: ttf-mscorefonts-installer
+      question: msttcorefonts/accepted-mscorefonts-eula
+      vtype: boolean
+      value: true
+      
+  - name: install packages
+    package:
+      name:
+        - dconf-editor
+        - flatpak
+        - gnome-tweaks
+        - mc
+        - python3-psutil
+        - ubuntu-restricted-extras
+        - wireguard-tools
+
+## Flatpak Apps
+
+  - name: Add the flathub flatpak repository remote to the user installation
+    flatpak_remote:
+      name: flathub
+      state: present
+      flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+  - name: install flatpak Apps
+    flatpak:
+      name: 
+        - com.bitwarden.desktop
+   #     - com.brave.Browser
+        - com.ultimaker.cura
+        - com.discordapp.Discord
+        - org.signal.Signal
+        - org.videolan.VLC
+      state: present
+      remote: flathub
+
+  - name: Yaru GTK3 Themes
+    flatpak:
+      name: 
+        - org.gtk.Gtk3theme.Yaru-dark
+        - org.gtk.Gtk3theme.Yaru-light
+        - org.gtk.Gtk3theme.Yaru-bark
+        - org.gtk.Gtk3theme.Yaru-bark-dark
+        - org.gtk.Gtk3theme.Yaru-magenta
+        - org.gtk.Gtk3theme.Yaru-magenta-dark
+        - org.gtk.Gtk3theme.Yaru-olive
+        - org.gtk.Gtk3theme.Yaru-olive-dark
+        - org.gtk.Gtk3theme.Yaru-prussiangreen
+        - org.gtk.Gtk3theme.Yaru-prussiangreen-dark
+        - org.gtk.Gtk3theme.Yaru-sage
+        - org.gtk.Gtk3theme.Yaru-sage-dark   
+## Not yet added to Flatpak - See https://github.com/ubuntu/yaru/issues/3618
+## Also relevant? https://askubuntu.com/questions/1403931/how-to-apply-system-theme-to-flatpak-apps-that-use-gtk4
+#        - org.gtk.Gtk3theme.Yaru-blue
+#        - org.gtk.Gtk3theme.Yaru-blue
+#        - org.gtk.Gtk3theme.Yaru-purple
+#        - org.gtk.Gtk3theme.Yaru-purple-dark
+#        - org.gtk.Gtk3theme.Yaru-red
+#        - org.gtk.Gtk3theme.Yaru-red-dark
+      state: present
+      remote: flathub
+  
+  - name: Yaru Old GTK3 Themes
+    flatpak:   
+      name: 
+        - org.gtk.Gtk3theme.Yaru-Amber-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Amber-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aqua/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aqua-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aqua-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aubergine/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aubergine-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Aubergine-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Blue/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Blue-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Blue-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Brown/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Brown-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Brown-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Cinnamon/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Cinnamon-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Cinnamon-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Deepblue/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Deepblue-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Deepblue-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Green/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Green-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Green-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Grey/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Grey-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Grey-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Lavender/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Lavender-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Lavender-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Orange/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Orange-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Orange-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Pink/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Pink-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Pink-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Purple/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Purple-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Purple-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Red/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Red-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Red-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Teal/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Teal-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Teal-light/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Yellow/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Yellow-dark/x86_64/stable
+        - org.gtk.Gtk3theme.Yaru-Yellow-light/x86_64/stable
+      state: present
+      remote: flathub
+
+## Install Snaps
+
+  - name: install snap packages
+    snap:
+      name:
+        - authy
+        - dbeaver-ce
+        - gimp
+        - telegram-desktop
+        - whatsie
+  
+  - name: Install classic snap packages
+    snap:
+      name: "{{ classicsnaps }}"
+      classic: yes
+    vars:
+      classicsnaps:
+        - gitkraken
+
+## Firefox VPN Config
+
+#  - name: copy firefox desktop file
+#    copy:
+#      src: files/firefox.desktop
+#      dest: /home/neil/.local/share/applications/firefox.desktop
+#      owner: neil
+#      group: neil
+      
+  - name: copy firefox vpn desktop file
+    copy:
+      src: files/firefox-vpn.desktop
+      dest: /home/neil/.local/share/applications/firefox-vpn.desktop
+      owner: neil
+      group: neil
+
+  - name: copy firefox vpn icon
+    copy:
+      src: files/firefox-vpn.png
+      dest: /home/neil/.local/share/applications/firefox-vpn.png
+      owner: neil
+      group: neil
+
+#  - name: remove default firefox icon
+
+## Wallpaper
+
+  - name: copy wallpaper file
+    copy:
+      src: files/Optical_Fibers_in_Dark_by_Elena_Stravoravdi.jpg
+      dest: /usr/share/backgrounds/Optical_Fibers_in_Dark_by_Elena_Stravoravdi.jpg
+      owner: root
+      group: root
+
+  - name: set wallpaper
+    become_user: neil
+    dconf:
+      key: "/org/gnome/desktop/background/picture-uri"
+      value: "'file:///usr/share/backgrounds/Optical_Fibers_in_Dark_by_Elena_Stravoravdi.jpg'"
+
+  - name: set wallpaper (dark)
+    become_user: neil
+    dconf:
+      key: "/org/gnome/desktop/background/picture-uri-dark"
+      value: "'file:///usr/share/backgrounds/Optical_Fibers_in_Dark_by_Elena_Stravoravdi.jpg'"
+
+  - name: set wallpaper position
+    become_user: neil
+    dconf:
+      key: "/org/gnome/desktop/background/picture-options"
+      value: "'zoom'"
+
+## Gnome Shell Theme
+
+  - name: Set dark theme with blue accent
+    become_user: neil
+    dconf:
+      key: "/org/gnome/desktop/interface/gtk-theme"
+      value: "'Yaru-blue-dark'"
+
+## Favourite Apps
+
+  - name: Set favourite apps in Dock
+    become_user: neil
+    dconf:
+      key: "/org/gnome/shell/favorite-apps"
+      value: ['org.gnome.Nautilus.desktop', 'com.discordapp.Discord.desktop', 'telegram-desktop_telegram-desktop.desktop', 'org.signal.Signal.desktop', 'com.ultimaker.cura.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Terminal.desktop']
+      
+## Dash to Dock
+
+  - name: set icon size
+    become_user: neil
+    dconf:
+      key: "/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size"
+      value: "36"
+
+  - name: move dock to bottom
+    become_user: neil
+    dconf:
+      key: "/org/gnome/shell/extensions/dash-to-dock/dock-position"
+      value: "'BOTTOM'"
+      
+  - name: Change dock to not extend
+    become_user: neil
+    dconf:
+      key: "/org/gnome/shell/extensions/dash-to-dock/extend-height"
+      value: "false"
+
+  - name: Change dock to hide
+    become_user: neil
+    dconf:
+      key: "/org/gnome/shell/extensions/dash-to-dock/dock-fixed"
+      value: "false"
+
+  - name: Intellihide
+    become_user: neil
+    dconf:
+      key: "/org/gnome/shell/extensions/dash-to-dock/intellihide"
+      value: "true"
+
+  - name: Don't show mounts in dock
+    become_user: neil
+    dconf:
+      key: "/org/gnome/shell/extensions/dash-to-dock/show-mounts"
+      value: "false"
+      
+  - name: Don't show trash in dock
+    become_user: neil
+    dconf:
+      key: "/org/gnome/shell/extensions/dash-to-dock/show-trash"
+      value: "false"
+
+## .bashrc
+
+  - name: copy .bashrc file
+    copy:
+      src: files/bashrc
+      dest: /home/neil/.bashrc
+      owner: neil
+      group: neil
+
+## Automate ansible deployment via cron
+
+#  - name: add  ansible user
+#    user:
+#      name: ansible
+#      system: yes
+
+#  - name: set up sudo for ansible user
+#    copy:
+#      src: files/sudoer_ansible
+#      dest: /etc/sudoers.d/ansible
+#      owner: root
+#      group: root
+#      mode: 0440
+
+#  - name: add ansible-pull cron job
+#    cron:
+#      name: ansible auto-provision
+#      user: ansible
+#      minute: "*/10"
+#      job: ansible-pull -o -U https://github.com/argoncoast/ansible_desktop.git 
+
+## Install Docker & Docker-Compose
+
+#  - name: Install required system packages
+#    apt:
+#      pkg:
+#        - apt-transport-https
+#        - ca-certificates
+#        - curl
+#        - software-properties-common
+#        - python3-pip
+#        - virtualenv
+#        - python3-setuptools
+#      state: latest
+#      update_cache: true
+
+#  - name: Add Docker GPG apt Key
+#    get_url:
+#      url: https://download.docker.com/linux/ubuntu/gpg
+#      dest: /etc/apt/trusted.gpg.d/docker.asc
+#      state: present
+
+#  - name: Add Docker Repository
+#    apt_repository:
+#      repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu kinetic stable
+#      state: present
+
+#  - name: Update apt and install docker-ce
+#    apt:
+#      name: 
+#        - docker-ce
+#        - docker-compose-plugin
+#      state: latest
+#      update_cache: true
+
+## To-do - Run docker daemon and add user to docker group.
+
+## Install Brave
+
+  - name: Add Brave GPG apt Key
+    get_url:
+      url: https://brave-browser-apt-release.s3.brave.com/brave-browser-rchive-keyring.gpg
+      dest: /etc/apt/trusted.gpg.d/brave.asc
+      state: present
+
+  - name: Add Brave Repository
+    apt_repository:
+      repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/brave.asc] https://brave-browser-apt-release.s3.brave.com/ stable main
+      state: present
+
+  - name: Update apt and install Brave
+    apt:
+      name: 
+        - brave-browser
+      state: latest
+      update_cache: true
+        
   - name: Remove firefox snap
     snap:
       name: firefox
