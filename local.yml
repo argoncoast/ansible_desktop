@@ -20,18 +20,13 @@
         - dconf-editor
         - flatpak
         - gnome-tweaks
-#        - libde-x265-0
         - mc
         - python3-psutil
 #        - ubuntu-restricted-extras
         - wireguard-tools
 
-## Uninstall default Totem Video player and install Flatpak version for x265 playback
-# https://gitlab.gnome.org/GNOME/totem/-/issues/526#note_1581028
-# May also need libde-x265-0 package?  May NOT need ubuntu-restricted-extras (Did lots of things to try and get x265 playback working)
-# Also need to remove gstreamer1.0-vaapi package as prevents videos being played both locally and smb See https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/1088
-
-  - name: Remove packages to facilitate video playback by using Totem from Flathub
+# Remove gstreamer1.0-vaapi package as prevents videos being played both locally and smb See https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/1088
+  - name: Remove Totem & gstreamer1.0-vaapi packages
     apt:
       name:
         - gstreamer1.0-vaapi
@@ -39,8 +34,10 @@
       state: absent
 
 ## Flatpak Apps
-
-  - name: Add the flathub flatpak repository remote to the user installation
+## Uninstall default Totem Video player and install Flatpak version for x265 playback
+# https://gitlab.gnome.org/GNOME/totem/-/issues/526#note_1581028
+# May also need libde-x265-0 package?  May NOT need ubuntu-restricted-extras (Did lots of things to try and get x265 playback working)
+  - name: Add the flathub repository remote to the user installation
     flatpak_remote:
       name: flathub
       state: present
@@ -50,12 +47,14 @@
     flatpak:
       name: 
         - com.bitwarden.desktop
-   #     - com.brave.Browser
         - com.ultimaker.cura
         - com.discordapp.Discord
+        - org.mozilla.firefox
         - org.signal.Signal
+        - org.telegram.desktop
         - org.gnome.Totem
         - org.videolan.VLC
+        - com.ktechpit.whatsie
       state: present
       remote: flathub
 
@@ -99,10 +98,6 @@
       name:
         - authy
         - dbeaver-ce
-        - gimp
-        - telegram-desktop
-        - vlc
-        - whatsie
   
   - name: Install classic snap packages
     snap:
@@ -125,36 +120,36 @@
         - firefox
       state: absent
       
-  - name: Add Firefox Repository
-    apt_repository:
-      repo: ppa:mozillateam/ppa
-      state: present
-
-  - name: Set PPA to be higher priority
-    shell:
-      cmd: "printf 'Package: firefox\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1500\n' | tee /etc/apt/preferences.d/mozilla-firefox"
-
-  - name: Update apt and install Firefox
-    apt:
-      name:
-        - firefox
-        - fonts-lyx
-        - xul-ext-ubufox
-      state: latest
-      install_recommends: yes
-#      force: yes
-      update_cache: true
+#  - name: Add Firefox Repository
+#    apt_repository:
+#      repo: ppa:mozillateam/ppa
+#      state: present
+#
+#  - name: Set PPA to be higher priority
+#    shell:
+#      cmd: "printf 'Package: firefox\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1500\n' | tee /etc/apt/preferences.d/mozilla-firefox"
+#
+#  - name: Update apt and install Firefox
+#    apt:
+#      name:
+#        - firefox
+#        - fonts-lyx
+#        - xul-ext-ubufox
+#      state: latest
+#      install_recommends: yes
+##      force: yes
+#      update_cache: true
 
   - name: copy firefox desktop file
     copy:
-      src: files/firefox.desktop
+      src: files/firefox-flatpak.desktop
       dest: /home/neil/.local/share/applications/firefox.desktop
       owner: neil
       group: neil
       
   - name: copy firefox vpn desktop file
     copy:
-      src: files/firefox-vpn.desktop
+      src: files/firefox-flatpak-vpn.desktop
       dest: /home/neil/.local/share/applications/firefox-vpn.desktop
       owner: neil
       group: neil
@@ -162,7 +157,7 @@
   - name: copy firefox vpn icon
     copy:
       src: files/firefox-vpn.png
-      dest: /home/neil/.local/share/applications/firefox-vpn.png
+      dest: /home/neil/.local/share/applications/firefox-flatpak-vpn.png
       owner: neil
       group: neil
 
@@ -264,6 +259,13 @@
       owner: neil
       group: neil
 
+  - name: copy .bash_aliases file
+    copy:
+      src: files/bash_aliases
+      dest: /home/neil/.bash_aliases
+      owner: neil
+      group: neil
+
 ## Automate ansible deployment via cron
 
 #  - name: add  ansible user
@@ -324,21 +326,21 @@
 
 ## Install Brave
 
-  - name: Add Brave GPG apt Key
-    get_url:
-      url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-      dest: /etc/apt/trusted.gpg.d/brave.asc
-    become: true
-
-  - name: Add Brave Repository
-    apt_repository:
-      repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/brave.asc] https://brave-browser-apt-release.s3.brave.com/ stable main
-      state: present
-
-  - name: Update apt and install Brave
-    apt:
-      name: 
-        - brave-browser
-      state: latest
-      update_cache: true
+#  - name: Add Brave GPG apt Key
+#    get_url:
+#      url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+#      dest: /etc/apt/trusted.gpg.d/brave.asc
+#    become: true
+#
+#  - name: Add Brave Repository
+#    apt_repository:
+#      repo: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/brave.asc] https://brave-browser-apt-release.s3.brave.com/ stable main
+#      state: present
+#
+#  - name: Update apt and install Brave
+#    apt:
+#      name: 
+#        - brave-browser
+#      state: latest
+#      update_cache: true
     
