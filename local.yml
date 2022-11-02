@@ -4,13 +4,15 @@
   become: true
 
   tasks:
-  
-  - name: prepare eula for ubuntu-restricted-extras 
-    debconf:
-      name: ttf-mscorefonts-installer
-      question: msttcorefonts/accepted-mscorefonts-eula
-      vtype: boolean
-      value: true
+
+## May not be needed anymore for x265 playback issues if using Totem from Flathub.
+
+#  - name: prepare eula for ubuntu-restricted-extras 
+#    debconf:
+#      name: ttf-mscorefonts-installer
+#      question: msttcorefonts/accepted-mscorefonts-eula
+#      vtype: boolean
+#      value: true
       
   - name: install packages
     package:
@@ -18,10 +20,23 @@
         - dconf-editor
         - flatpak
         - gnome-tweaks
+#        - libde-x265-0
         - mc
         - python3-psutil
-        - ubuntu-restricted-extras
+#        - ubuntu-restricted-extras
         - wireguard-tools
+
+## Uninstall default Totem Video player and install Flatpak version for x265 playback
+# https://gitlab.gnome.org/GNOME/totem/-/issues/526#note_1581028
+# May also need libde-x265-0 package?  May NOT need ubuntu-restricted-extras (Did lots of things to try and get x265 playback working)
+# Also need to remove gstreamer1.0-vaapi package as prevents videos being played both locally and smb See https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/1088
+
+  - name: Remove packages to facilitate video playback by using Totem from Flathub
+    apt:
+      name:
+        - gstreamer1.0-vaapi
+        - totem
+      state: absent
 
 ## Flatpak Apps
 
@@ -39,6 +54,7 @@
         - com.ultimaker.cura
         - com.discordapp.Discord
         - org.signal.Signal
+        - org.gnome.Totem
         - org.videolan.VLC
       state: present
       remote: flathub
@@ -58,70 +74,24 @@
         - org.gtk.Gtk3theme.Yaru-prussiangreen-dark
         - org.gtk.Gtk3theme.Yaru-sage
         - org.gtk.Gtk3theme.Yaru-sage-dark   
-## Not yet added to Flatpak - See https://github.com/ubuntu/yaru/issues/3618
-## Also relevant? https://askubuntu.com/questions/1403931/how-to-apply-system-theme-to-flatpak-apps-that-use-gtk4
+## Not yet added to Flatpak - See:
+# https://github.com/ubuntu/yaru/issues/3618
+# https://github.com/flathub/flathub/pull/3053
+# https://github.com/flathub/flathub/pull/3054
+# https://github.com/flathub/flathub/pull/3055
+# https://github.com/flathub/flathub/pull/3056
+# https://github.com/flathub/flathub/pull/3059
+# https://github.com/flathub/flathub/pull/3060
 #        - org.gtk.Gtk3theme.Yaru-blue
 #        - org.gtk.Gtk3theme.Yaru-blue
 #        - org.gtk.Gtk3theme.Yaru-purple
 #        - org.gtk.Gtk3theme.Yaru-purple-dark
 #        - org.gtk.Gtk3theme.Yaru-red
 #        - org.gtk.Gtk3theme.Yaru-red-dark
+## Also relevant? https://askubuntu.com/questions/1403931/how-to-apply-system-theme-to-flatpak-apps-that-use-gtk4
       state: present
       remote: flathub
   
-  - name: Yaru Old GTK3 Themes
-    flatpak:   
-      name: 
-        - org.gtk.Gtk3theme.Yaru-Amber-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Amber-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Aqua/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Aqua-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Aqua-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Aubergine/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Aubergine-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Aubergine-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Blue/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Blue-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Blue-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Brown/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Brown-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Brown-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Cinnamon/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Cinnamon-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Cinnamon-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Deepblue/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Deepblue-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Deepblue-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Green/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Green-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Green-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Grey/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Grey-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Grey-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Lavender/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Lavender-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Lavender-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Orange/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Orange-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Orange-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Pink/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Pink-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Pink-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Purple/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Purple-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Purple-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Red/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Red-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Red-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Teal/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Teal-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Teal-light/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Yellow/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Yellow-dark/x86_64/stable
-        - org.gtk.Gtk3theme.Yaru-Yellow-light/x86_64/stable
-      state: present
-      remote: flathub
-
 ## Install Snaps
 
   - name: install snap packages
@@ -131,6 +101,7 @@
         - dbeaver-ce
         - gimp
         - telegram-desktop
+        - vlc
         - whatsie
   
   - name: Install classic snap packages
@@ -141,14 +112,45 @@
       classicsnaps:
         - gitkraken
 
-## Firefox VPN Config
+## Firefox - Setup for different profiles and also change to deb
 
-#  - name: copy firefox desktop file
-#    copy:
-#      src: files/firefox.desktop
-#      dest: /home/neil/.local/share/applications/firefox.desktop
-#      owner: neil
-#      group: neil
+  - name: Remove firefox snap
+    snap:
+      name: firefox
+      state: absent
+
+  - name: Remove Firefox "deb"
+    apt:
+      name:
+        - firefox
+      state: absent
+      
+  - name: Add Firefox Repository
+    apt_repository:
+      repo: ppa:mozillateam/ppa
+      state: present
+
+  - name: Set PPA to be higher priority
+    shell:
+      cmd: "printf 'Package: firefox\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1500\n' | tee /etc/apt/preferences.d/mozilla-firefox"
+
+  - name: Update apt and install Firefox
+    apt:
+      name:
+        - firefox
+        - fonts-lyx
+        - xul-ext-ubufox
+      state: latest
+      install_recommends: yes
+#      force: yes
+      update_cache: true
+
+  - name: copy firefox desktop file
+    copy:
+      src: files/firefox.desktop
+      dest: /home/neil/.local/share/applications/firefox.desktop
+      owner: neil
+      group: neil
       
   - name: copy firefox vpn desktop file
     copy:
@@ -339,34 +341,4 @@
         - brave-browser
       state: latest
       update_cache: true
-        
-  - name: Remove firefox snap
-    snap:
-      name: firefox
-      state: absent
-
-  - name: Remove Firefox "deb"
-    apt:
-      name:
-        - firefox
-      state: absent
-      
-  - name: Add Firefox Repository
-    apt_repository:
-      repo: ppa:mozillateam/ppa
-      state: present
-
-  - name: Set PPA to be higher priority
-    shell:
-      cmd: "printf 'Package: firefox\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1500\n' | tee /etc/apt/preferences.d/mozilla-firefox"
-
-  - name: Update apt and install Firefox
-    apt:
-      name:
-        - firefox
-        - fonts-lyx
-        - xul-ext-ubufox
-      state: latest
-      install_recommends: yes
-#      force: yes
-      update_cache: true
+    
