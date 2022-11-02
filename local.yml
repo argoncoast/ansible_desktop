@@ -324,7 +324,7 @@
 
   - name: Add Brave GPG apt Key
     get_url:
-      url: https://brave-browser-apt-release.s3.brave.com/brave-browser-rchive-keyring.gpg
+      url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
       dest: /etc/apt/trusted.gpg.d/brave.asc
       state: present
 
