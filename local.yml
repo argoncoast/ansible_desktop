@@ -326,7 +326,7 @@
     get_url:
       url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
       dest: /etc/apt/trusted.gpg.d/brave.asc
-      state: present
+    become: true
 
   - name: Add Brave Repository
     apt_repository:
