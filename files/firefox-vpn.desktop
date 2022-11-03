@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
-Name=Firefox VPN TEST
+Name=Firefox VPN
 GenericName=Web Browser
 Comment=Browse the Web
 Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=firefox --file-forwarding org.mozilla.firefox -p vpn @@u %u @@
@@ -29,5 +29,6 @@ Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=firefox --file
 
 [Desktop Action profile-manager-window]
 Name=Open the Profile Manager
-Name[cs]=Správa profilů
+Name[en-GB]=Open the Profile Manager
+Name[en-US]=Open the Profile Manager
 Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=firefox org.mozilla.firefox --ProfileManager

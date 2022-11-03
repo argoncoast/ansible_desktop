@@ -107,6 +107,7 @@
       classic: yes
     vars:
       classicsnaps:
+        - code
         - gitkraken
 
 ## Firefox - Setup for different profiles and also change to deb
